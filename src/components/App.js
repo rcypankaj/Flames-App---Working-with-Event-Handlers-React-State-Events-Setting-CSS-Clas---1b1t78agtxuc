@@ -14,9 +14,10 @@ class App extends Component {
   calculateHandler() {
     const first = this.state.firstName;
     const last = this.state.lastName;
+    let length = first.length + last.length;
     let counter = 0;
     if (!first || !last) {
-      counter = -1;
+      length = -1;
     } else {
       const lowerCaseArray = Array(26).fill(0);
       const upperCaseArray = Array(26).fill(0);
@@ -40,15 +41,18 @@ class App extends Component {
           upperCaseArray[ch.charCodeAt() - 65]--;
         }
       }
+
+      length -= counter * 2;
+      length %= 6;
     }
 
     let result = "";
-    switch ((counter * 2) % 6) {
+    switch (length) {
       case 0:
         result = "Siblings";
         break;
       case 1:
-        result: "Friends";
+        result = "Friends";
         break;
       case 2:
         result = "Love";
